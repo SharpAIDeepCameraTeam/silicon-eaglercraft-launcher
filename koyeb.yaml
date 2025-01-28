@@ -1,0 +1,27 @@
+name: silicon-eaglercraft-launcher
+services:
+  - name: web
+    instance_type: nano
+    git:
+      repository: SharpAIDeepCameraTeam/silicon-eaglercraft-launcher
+      branch: main
+    ports:
+      - port: 8081
+        protocol: http
+    routes:
+      - path: /
+        port: 8081
+    healthcheck:
+      port: 8081
+      path: /
+      initial_delay: 10s
+      interval: 30s
+      timeout: 5s
+    envs:
+      - key: NODE_ENV
+        value: production
+    scale:
+      min: 1
+      max: 1
+      cpu: 1000
+      memory: 512
